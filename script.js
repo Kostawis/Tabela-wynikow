@@ -1,0 +1,285 @@
+var c1 = [];
+var c2 = [];
+var c3 = [];
+var c4 = [];
+var c5 = [];
+var c6 = [];
+var c7 = [];
+var c8 = [];
+var c9 = [];
+var c10 = [];
+var c11 = [];
+var ID = 0;
+$(document).ready(function() {
+
+    
+ 
+
+    $("input").dblclick(function(){
+        $(this).prop("readonly", false) 
+
+        if($(this).prop("readonly", false)) {
+
+            var id = $(this).attr('id')
+            $(this).closest('.komurka').addClass(id + 'A')
+
+            $(this).closest('.komurka').css({
+                'border-radius' : '15px',
+                'transform' : 'scale(1.15)'
+            });
+            
+        }
+    });
+    $("input").focusout(function(){
+        $(this).prop("readonly", true);
+        
+
+        if($(this).prop("readonly", true)) {
+
+            var id = $(this).attr('id')
+            $(this).closest('.komurka').removeClass(id + 'A')
+
+            $(this).closest('.has-input').css({
+                'border-radius' : '',
+                'transform' : ''
+            });
+        }
+    });
+    
+    $("input").on("change paste keyup", function() {
+        //console.log($(this).val()); 
+        sumaPunktow(this)
+    });
+
+   
+    var i=0;
+    $('input').each(function(){
+        i++;
+        var newData='nr'+i;
+        $(this).attr("data-place", newData)
+        
+    });
+
+    $('input[type="number"]').each(function(){  
+
+        var data = $(this).attr('data-place');
+        var value = localStorage.getItem(data);
+        
+        $(this).val(value);
+        
+    }); 
+    
+    sumaOnLoad()
+
+});
+
+
+   
+
+$('.exit-button').click(function() {
+    
+    $('.stopwatch-container').animate({
+        width: "300px",
+        top: "30px",
+        height: "70px",
+        right: "150px",
+        borderRadius: "5px"
+      }, 400 );
+      $('.time').animate({
+        fontSize: "3em",
+        width: "146px"
+      }, 400 );
+      $('.controls').slideUp(150);
+      $('.exit-button').fadeOut(150);
+      
+     
+});
+
+$('.time').click(function() {
+
+    $('.stopwatch-container').animate({
+        width: "100%",
+        height: "100vh",
+        bottom: "",
+        top: "0",
+        right: "",
+        borderRadius: ""
+    }, 400 );
+    $('.time').animate({
+        fontSize: "180px",
+        width: "550px"
+    }, 400 );
+    $(".controls").fadeIn({
+        start: function () {
+            $(this).css({
+            display: "flex"
+            }, 400)
+        }
+    });
+    $('.exit-button').fadeIn(400);
+    
+});
+$('.stoper-btn').click(function() {
+    $('.time').click()
+});
+
+$('.clear').click(function() {
+    deleteItem() 
+})
+
+$('.tabela-koncowa').click(function() {
+    $('.tabela-overlay').fadeIn(400) 
+})
+
+$('input').keydown(function (e) {
+    if (e.which === 13) {
+        //$(this).next('.inputs').focus();
+        var nastepny = $(this).closest('.komurka').nextAll().eq(0).find('input')
+        var thisID = $(this).attr('id')
+        var id = $(nastepny).attr('id')
+        $(this).prop("readonly", true)
+        $(this).closest('.komurka').removeClass(thisID + 'A')
+        $(nastepny).prop("readonly", false)
+        $(nastepny).focus()
+        
+        $(nastepny).closest('.komurka').addClass( id + 'A')
+
+        $(nastepny).closest('.komurka').css({
+            'border-radius' : '15px',
+            'transform' : 'scale(1.15)'
+        });
+    }
+});
+
+function deleteItem() {
+    if (confirm("Czy napewno chcesz usunąć wszystkie dane z tabeli?")) {
+        // your deletion code
+        clearLocalStorage()
+        location.reload()
+    }
+    return false;
+}
+function clearLocalStorage(){
+    localStorage.clear();
+}
+
+function sumaPunktow(komurka) {
+    var komurkaID = $(komurka).attr('id');
+    var sum = 0;
+    var data = $(komurka).attr('data-place');
+    var value = $(komurka).val();
+
+    $(".main-row").find("#" + komurkaID).each(function(){
+        sum += +$(this).val();
+    });
+    $('.' + komurkaID + '-sum').html(sum);
+
+   localStorage.setItem(data, value);
+    
+}
+
+function sumaOnLoad() {
+    
+    for ( var ID = 0, l = 11; ID < l; ID++ ) {
+        var sum = 0;
+        $(".main-row").find("#c" + ID).each(function(){
+        sum += +$(this).val();
+        });
+        $('.c' + ID + '-sum').html(sum);
+    }
+    
+   
+}
+
+$(function () {
+
+    // Never assume one widget is just used once in the page. You might
+    // think of adding a second one. So, we adjust accordingly.
+
+    $('.stopwatch').each(function () {
+
+        // Cache very important elements, especially the ones used always
+        var element = $(this);
+        var running = element.data('autostart');
+        var minutesElement = element.find('.minutes');
+        var secondsElement = element.find('.seconds');
+        var toggleElement = element.find('.toggle');
+        var resetElement = element.find('.reset');
+        var pauseText = toggleElement.data('pausetext');
+        var resumeText = toggleElement.data('resumetext');
+        var startText = toggleElement.text();
+
+        // And it's better to keep the state of time in variables 
+        // than parsing them from the html.
+        var minutes, seconds, timer;
+
+        function prependZero(time, length) {
+            // Quick way to turn number to string is to prepend it with a string
+            // Also, a quick way to turn floats to integers is to complement with 0
+            time = '' + (time | 0);
+            // And strings have length too. Prepend 0 until right.
+            while (time.length < length) time = '0' + time;
+            return time;
+        }
+
+        function setStopwatch(minutes, seconds) {
+            // Using text(). html() will construct HTML when it finds one, overhead.
+            minutesElement.text(prependZero(minutes, 2));
+            secondsElement.text(prependZero(seconds, 2));
+        }
+
+        // Update time in stopwatch periodically - every 25ms
+        function runTimer() {
+            // Using ES5 Date.now() to get current timestamp            
+            var startTime = Date.now();
+            var prevMinutes = minutes;
+            var prevSeconds = seconds;
+
+            timer = setInterval(function () {
+                var timeElapsed = Date.now() - startTime;
+
+                minutes = ((timeElapsed / 60000) + prevMinutes) % 60;
+                seconds = ((timeElapsed / 1000) + prevSeconds) % 60;
+
+                setStopwatch(minutes, seconds);
+            }, 25);
+        }
+
+        // Split out timer functions into functions.
+        // Easier to read and write down responsibilities
+        function run() {
+            running = true;
+            runTimer();
+            toggleElement.text(pauseText);
+        }
+
+        function pause() {
+            running = false;
+            clearTimeout(timer);
+            toggleElement.text(resumeText);
+        }
+
+        function reset() {
+            running = false;
+            pause();
+            minutes = seconds = 0;
+            setStopwatch(minutes, seconds);
+            toggleElement.text(startText);
+        }
+
+        // And button handlers merely call out the responsibilities
+        toggleElement.on('click', function () {
+            (running) ? pause() : run();
+        });
+
+        resetElement.on('click', function () {
+            reset();
+        });
+
+        // Another advantageous thing about factoring out functions is that
+        // They are reusable, callable elsewhere.
+        reset();
+        if(running) run();
+    });
+
+});
