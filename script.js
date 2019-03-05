@@ -296,10 +296,10 @@ $(function () {
 
 });
 
-function Szkola(wynik, nazwa, id) {
+function Szkola(wynik, nazwa) {
     this.wynik = wynik;
     this.nazwa = nazwa;
-    this.id = id;
+
 }
 
 function dodajDoSzkola() {  
@@ -307,8 +307,7 @@ function dodajDoSzkola() {
     for(i=1; i <= 11; i++) {
         var nazwa = $('.c' + i + '-klasa').html()
         var wynik = $('.c' + i + '-sum').html()
-        var id = 'c' + i
-        window["szkola"+i] = new Szkola(wynik, nazwa, id);
+        window["szkola"+i] = new Szkola(wynik, nazwa);
 
         var d = window["szkola"+i]
         szkoly.push(d)
@@ -328,15 +327,11 @@ function dodajDoSzkola() {
         $('.tabela-tymczasowe').hide()
         $('.tabela-tymczasowe').slideDown('slow')
     }
-    
-
-
-    console.log(szkoly[0].wynik)
 }
 
 function dodanieElementuTabeli(i, szkola, wynik) {
     return  '<div class="tabela-element tabela-tymczasowe">'+
-                '<div class="miejsce">' + i + '</div>'+
+                '<div class="miejsce"> ' + i + '.</div>'+
                 '<div class="klasa">' + szkola + '</div>'+
                 '<div class="punkty">' + wynik + '</div>'+
             '</div>'
