@@ -76,7 +76,7 @@ $(document).ready(function() {
 
    
 
-$('.exit-button').click(function() {
+$('.exit-button-stoper').click(function() {
     
     $('.stopwatch-container').animate({
         width: "300px",
@@ -116,7 +116,7 @@ $('.time').click(function() {
             }, 400)
         }
     });
-    $('.exit-button').fadeIn(400);
+    $('.exit-button-stoper').fadeIn(400);
     
 });
 $('.stoper-btn').click(function() {
@@ -135,6 +135,9 @@ $('.tabela-koncowa').click(function() {
             }, 400)
         }
     }) 
+})
+$('.exit-button-tabela').click(function() {
+    $('.tabela-overlay').fadeOut(400);
 })
 
 $('input').keydown(function (e) {
