@@ -6,8 +6,9 @@ body {
 h1 {
     margin-left: 50px;
     margin-top: 40px !important;
-    font-size: 48px !important;
+    font-size: 30px !important;
     font-weight: bold !important;
+    color: whitesmoke !important;
 }
 .main-wrap {
     width: 90vw;
@@ -254,8 +255,8 @@ input[type=number]::-webkit-outer-spin-button
 
 .stopwatch-container {
     position: absolute;
-    top: 30px;
-    right: 150px;
+    top: 20px;
+    right: 40px;
     width: 300px;
     height: 70px;
     border-radius: 5px;
@@ -364,5 +365,24 @@ input[type=number]::-webkit-outer-spin-button
     top: 0;
     left: 0;
     background: hsla(162, 100%, 25%, 0.8);
-    display: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tabela-container {
+    width: 800px;
+    height: 70vh;
+    background: rgba(143, 143, 143, 0.7);
+    border-radius: 20px;
+    box-shadow: 4px 7px 20px 0px #545b62;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tabela-inside {
+    width: 90%;
+    height: 80%;
+}
+.tabela-inside {
+    
 }

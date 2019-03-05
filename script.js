@@ -80,9 +80,9 @@ $('.exit-button').click(function() {
     
     $('.stopwatch-container').animate({
         width: "300px",
-        top: "30px",
+        top: "20px",
         height: "70px",
-        right: "150px",
+        right: "40px",
         borderRadius: "5px"
       }, 400 );
       $('.time').animate({
@@ -128,7 +128,13 @@ $('.clear').click(function() {
 })
 
 $('.tabela-koncowa').click(function() {
-    $('.tabela-overlay').fadeIn(400) 
+    $('.tabela-overlay').fadeIn({
+        start: function () {
+            $(this).css({
+            display: "flex"
+            }, 400)
+        }
+    }) 
 })
 
 $('input').keydown(function (e) {
