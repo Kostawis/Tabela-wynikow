@@ -367,7 +367,7 @@ input[type=number]::-webkit-outer-spin-button
     top: 0;
     left: 0;
     background: hsla(162, 100%, 25%, 0.8);
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
 }
@@ -385,6 +385,42 @@ input[type=number]::-webkit-outer-spin-button
     width: 90%;
     height: 80%;
 }
-.tabela-inside {
+.tabela-element {
+    display: flex;
+    width: 100%;
+    height: 10%;
+    background: whitesmoke;
+    border-radius: 30px;
+    margin-top: 10px;
+    font-size: 26px;
+    font-weight: 700;
+}
+.tabela-tymczasowe {
+    height: 16%;
+    font-size: 30px;
+    font-weight: 700;
+}
+.tabela-inside > div:nth-last-of-type(3) {
+    background: #FFD700;
+}
+.tabela-inside > div:nth-last-of-type(2) {
+    background: #c0c0c0;
+}
+.tabela-inside > div:nth-last-of-type(1) {
+    background: #cd7f32;
+}
+.tabela-element div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tabela-element .miejsce {
+    width: 20%;
+}
+.tabela-element .klasa {
+    width: 60%;
     
+}
+.tabela-element .punkty {
+    width: 20%;
 }
