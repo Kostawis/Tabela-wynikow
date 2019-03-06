@@ -136,6 +136,8 @@ $('.tabela-koncowa').click(function() {
         }
     }) 
 
+    $('.exit-button-tabela').fadeIn(400);
+
     dodajDoSzkola()
 
 })
