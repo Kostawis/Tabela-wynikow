@@ -337,11 +337,10 @@ function dodanieElementuTabeli(i, szkola, wynik) {
             '</div>'
 }
 
-var typed = new Typed('h1', {
+var typed = new Typed('.animate-h1', {
     strings: ["Omnibus Matematyczno-Przyrodniczy 2019", "Jakiś inny tekst który będzie się wyświetlał", "I na przykład jeszcze jeden, i tak w kółko ;D", "Tylko pewnie dużo wolniej, tak żemy nie raziło w oczy :D"],
-    typeSpeed: 20,
+    typeSpeed: 35,
     backDelay: 2000,
     startDelay: 500,
-    cursorChar: '|',
     loop: true,
   });
