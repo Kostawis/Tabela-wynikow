@@ -1,6 +1,6 @@
 html,
 body {
-    background-image: url('tloC1.png') !important;
+    background: rgb(78, 78, 78) !important;
     margin: 0px;
 }
 
@@ -17,7 +17,7 @@ p,
     justify-content: center;
     margin-top: 40px !important;
     border-radius: 20px;
-    background: rgba(128, 128, 128, 0.856);
+
     padding: 7px;
     padding-left: 17px;
     width: 65vw;
