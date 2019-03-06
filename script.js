@@ -345,4 +345,5 @@ var typed = new Typed('.animate-h1', {
     backDelay: 400000,
     startDelay: 500,
     loop: true,
+    cursorChar: ''
   });
