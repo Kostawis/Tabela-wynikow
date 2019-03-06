@@ -340,7 +340,7 @@ function dodanieElementuTabeli(i, szkola, wynik) {
 var typed = new Typed('h1', {
     strings: ["Omnibus Matematyczno-Przyrodniczy 2019", "Jakiś inny tekst który będzie się wyświetlał", "I na przykład jeszcze jeden, i tak w kółko ;D", "Tylko pewnie dużo wolniej, tak żemy nie raziło w oczy :D"],
     typeSpeed: 20,
-    backDelay: 5000,
+    backDelay: 2000,
     startDelay: 500,
     cursorChar: '|',
     loop: true,
